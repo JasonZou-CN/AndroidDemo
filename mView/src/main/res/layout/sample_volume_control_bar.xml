@@ -6,18 +6,15 @@
 
     <jasonzou.demo.mview.view.VolumeControlBar
             android:background="#ccc"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:paddingLeft="20dp"
-            android:paddingBottom="40dp"
-           app:firstColor="#000"
+            android:layout_width="60dp"
+            android:layout_centerInParent="true"
+            android:layout_height="60dp"
+            app:firstColor="#000"
             app:secondColor="#fff"
             app:circleWidth="3dp"
             app:dotCount="10"
             app:splitSize="20"
-            app:bg=""
-
-
+            app:bg="@drawable/ic_volume_up_white_24dp"
             />
 
 </RelativeLayout>
