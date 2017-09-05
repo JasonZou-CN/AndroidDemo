@@ -49,7 +49,6 @@ public class RichText extends Activity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 //                前景色背景色相对哈哈大小删除线下划线上标小上标斜体显示图片点击超链接 23 0 1
                 Log.i(TAG, "beforeTextChanged: " + s + " " + start + " " + count + " " + after);
-
             }
 
             @Override
@@ -69,7 +68,21 @@ public class RichText extends Activity {
                 Log.i(TAG, "afterTextChanged: " + s);
                 ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.parseColor("#FF0000"));
                 if (string.toString().contains("j"))
-                    s.setSpan(foregroundColorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+                    s.setSpan(foregroundColorSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ForegroundColorSpan[] spans = s.getSpans(0, s.length(), ForegroundColorSpan.class);
+                for (ForegroundColorSpan mSpan : spans
+                        ) {
+                    if (mSpan instanceof ForegroundColorSpan) {
+                        int start = s.getSpanStart(mSpan);
+                        int end = s.getSpanEnd(mSpan);
+                        int flag = s.getSpanFlags(mSpan);
+                        Log.i("SpannableString Spans", "Found StyleSpan at:\n" +
+                                "Start: " + start +
+                                "\n End: " + end +
+                                "\n Flag(s): " + flag);
+                    }
+                }
+
 
             }
         });
