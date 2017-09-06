@@ -7,22 +7,15 @@
         tools:context="jasonzou.demo.application.activity.RichText">
 
     <EditText
-            android:id="@+id/richText"
+            android:hint="hello"
+            android:id="@+id/mEdittext"
             android:layout_width="match_parent"
             android:layout_centerInParent="true"
             android:layout_height="wrap_content"/>
 
-    <EditText
-            android:id="@+id/etRichText"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/transparent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    <EditText
-            android:hint="hello"
-            android:id="@+id/mEdittext"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
+    <Button
+            android:id="@+id/choose"
+            android:layout_width="wrap_content"
+            android:text="已选择"
             android:layout_height="wrap_content"/>
 </RelativeLayout>
