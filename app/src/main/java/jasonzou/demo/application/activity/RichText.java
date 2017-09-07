@@ -1,6 +1,7 @@
 package jasonzou.demo.application.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,10 +12,12 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -33,6 +36,31 @@ public class RichText extends Activity {
     Button choose;
     MTextWatcher textWatcher;
 
+    public class EditTextCursorWatcher extends EditText {
+
+        public EditTextCursorWatcher(Context context, AttributeSet attrs,
+                                     int defStyle) {
+            super(context, attrs, defStyle);
+
+        }
+
+        public EditTextCursorWatcher(Context context, AttributeSet attrs) {
+            super(context, attrs);
+
+        }
+
+        public EditTextCursorWatcher(Context context) {
+            super(context);
+
+        }
+
+
+        @Override
+        protected void onSelectionChanged(int selStart, int selEnd) {
+            Toast.makeText(getContext(), "selStart is " + selStart + "selEnd is " + selEnd, Toast.LENGTH_LONG).show();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +78,7 @@ public class RichText extends Activity {
         // 可以点击
         textWatcher = new MTextWatcher();
         mEdittext.setMovementMethod(LinkMovementMethod.getInstance());
-//        mEdittext.setHighlightColor(Color.CYAN);//ClickableSpan 点击后的背景色
+        //        mEdittext.setHighlightColor(Color.CYAN);//ClickableSpan 点击后的背景色
         //        mEdittext.setLongClickable(false);//取消长按后的菜单
         mEdittext.addTextChangedListener(textWatcher);
     }
@@ -132,7 +160,7 @@ public class RichText extends Activity {
                 MClickableSpan mClickableSpan = new MClickableSpan();
 
                 mSpanStr.setSpan(foregroundColorSpan, mStart - 1, mStart + mCount, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//                mSpanStr.setSpan(backgroundColorSpan, mStart - 1, mStart + mCount, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//看不见光标位置
+                //                mSpanStr.setSpan(backgroundColorSpan, mStart - 1, mStart + mCount, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//看不见光标位置
                 mSpanStr.setSpan(mClickableSpan, mStart - 1, mStart + mCount, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
