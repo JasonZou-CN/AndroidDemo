@@ -1,7 +1,6 @@
 package jasonzou.demo.application.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,12 +11,11 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,31 +33,6 @@ public class RichText extends Activity {
     @BindView(R.id.choose)
     Button choose;
     MTextWatcher textWatcher;
-
-    public class EditTextCursorWatcher extends EditText {
-
-        public EditTextCursorWatcher(Context context, AttributeSet attrs,
-                                     int defStyle) {
-            super(context, attrs, defStyle);
-
-        }
-
-        public EditTextCursorWatcher(Context context, AttributeSet attrs) {
-            super(context, attrs);
-
-        }
-
-        public EditTextCursorWatcher(Context context) {
-            super(context);
-
-        }
-
-
-        @Override
-        protected void onSelectionChanged(int selStart, int selEnd) {
-            Toast.makeText(getContext(), "selStart is " + selStart + "selEnd is " + selEnd, Toast.LENGTH_LONG).show();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

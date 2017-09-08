@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         tools:context="jasonzou.demo.application.activity.RichText">
 
-    <jasonzou.demo.application.activity.RichText.EditTextCursorWatcher
+    <EditText
             android:hint="hello"
             android:id="@+id/mEdittext"
             android:layout_width="match_parent"
