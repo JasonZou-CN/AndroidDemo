@@ -1,1 +1,1 @@
-include ':app', ':mView', ':timeline', ':jpush'
+include ':app', ':mView', ':timeline', ':mjpush'
