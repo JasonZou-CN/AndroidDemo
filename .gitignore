@@ -56,3 +56,8 @@ build/
 # Local configuration file (sdk path, etc)
 local.properties
 /gradle/
+db/src/main/res/mipmap-hdpi/
+db/src/main/res/mipmap-xxxhdpi/
+db/src/main/res/mipmap-xxhdpi/
+db/src/main/res/mipmap-xhdpi/
+db/src/main/res/mipmap-mdpi/
