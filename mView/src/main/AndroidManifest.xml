@@ -8,6 +8,10 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name="jasonzou.demo.mview.MainActivity">
+
+        </activity>
+        <activity android:name="jasonzou.demo.mview.activity.MTabLayout"
+                android:theme="@style/Theme.AppCompat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
