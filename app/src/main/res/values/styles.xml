@@ -5,4 +5,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="test" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowBackground">@drawable/qidong2</item>
+    </style>
 </resources>

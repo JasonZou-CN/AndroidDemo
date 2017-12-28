@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!--<external-path
+        name="cameraPath"
+        path="rongxinlaw.lcoce.lawyer/camera/"/>-->
+        <!--java.lang.IllegalArgumentException: Failed to find configured root that contains   错误-->
+
+
+    <!--<root-path
+        name="cameraPath"
+        path=""/>-->
+    <external-path
+        name="camera_photos"
+        path=""/>
+</paths>
