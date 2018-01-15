@@ -16,7 +16,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.lcoce.www.runsomething.BuildConfig;
-import com.lcoce.www.runsomething.MainActivity;
 import com.lcoce.www.runsomething.R;
 
 import java.io.DataOutputStream;
@@ -38,7 +37,7 @@ public class Utils {
     /**
      * 文件上传
      */
-    public void uploadFile() {
+    public static void uploadFile() {
         new Thread() {
             @Override
             public void run() {
@@ -115,18 +114,35 @@ public class Utils {
     /**
      * 系统通知
      */
-    public void notifySomething(Context ctx, Class clz) {
+    public static void notifySomething(Context ctx, Class clz) {
         int random = new Random().nextInt();
+
+        //构建一个Intent
+        Intent resultIntent = new Intent(ctx, clz);
+        resultIntent.putExtra("name", "");
+        //封装一个Intent(设置ChatList - android:launchMode="singleInstance")
+        PendingIntent pendingIntent = PendingIntent.getActivity(ctx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        //获取通知管理器对象
+        NotificationManager mNotificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        /*通知内容*/
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ctx, ctx.getPackageName());
+        mBuilder.setTicker("新通知");//第一次提示消息的时候显示在通知栏上;
+        mBuilder.setSmallIcon(R.drawable.notification_3);
+        mBuilder.setLargeIcon(BitmapFactory.decodeResource(ctx.getResources(), R.drawable.notification));
+        mBuilder.setContentTitle("Android O 通知：" + "(" + random + "条新消息)");
+        mBuilder.setContentText("这是一条逗你玩的消息");
+        mBuilder.setAutoCancel(true);//点击后，自动消失
+        mBuilder.setContentIntent(pendingIntent);
+        mBuilder.setNumber(random); //久按桌面图标时允许的此条通知的数量
+        //        mBuilder.setVibrate(new long[]{0, 200, 300}).setSound(sound).setLights(Color.RED, 1000, 1000);
+
         /*Android O*/
         if (Build.VERSION.SDK_INT >= 26) {
-            Intent intent = new Intent(ctx, clz);
-            intent.putExtra("name", "");
-            PendingIntent pintent = PendingIntent.getActivity(ctx, 0, intent, 0);
-
             Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             /*Android O：通知控制-通知类别*/
-            @SuppressLint("WrongConstant")
-            NotificationChannel mChannel = new NotificationChannel(ctx.getPackageName(), "App通知", NotificationManager.IMPORTANCE_MAX);
+            @SuppressLint("WrongConstant") NotificationChannel mChannel = new NotificationChannel(ctx.getPackageName(), "App通知", NotificationManager.IMPORTANCE_MAX);
             mChannel.setDescription("通知类别描述：紧急通知");
             mChannel.enableLights(true);//是否在桌面icon右上角展示小红点
             mChannel.setLightColor(Color.RED);//小红点颜色
@@ -134,45 +150,12 @@ public class Utils {
             mChannel.enableVibration(true);
             mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
             mChannel.setSound(sound, null);
-            NotificationManager mNotificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.createNotificationChannel(mChannel);
-
-            Notification.Builder builder = new Notification.Builder(ctx, ctx.getPackageName());
-            builder.setTicker("新通知");
-            builder.setContentTitle("Android O 通知：" + "(" + random + "条新消息)");
-            builder.setContentText("这是一条逗你玩的消息");
-            builder.setSmallIcon(R.drawable.notification_3);
-            builder.setLargeIcon(BitmapFactory.decodeResource(ctx.getResources(), R.drawable.notification));
-            builder.setAutoCancel(true);
-            builder.setContentIntent(pintent);
-            builder.setNumber(3); //久按桌面图标时允许的此条通知的数量
-
-            Notification notification = builder.build();
-            mNotificationManager.notify(random, notification);
         } else {
-            //构建一个Intent
-            Intent resultIntent = new Intent(ctx, MainActivity.class);
-            resultIntent.putExtra("name", "");
-            //封装一个Intent(设置ChatList - android:launchMode="singleInstance")
-            PendingIntent pendingIntent = PendingIntent.getActivity(ctx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ctx);
-            mBuilder.setTicker("新通知");//第一次提示消息的时候显示在通知栏上;
-            mBuilder.setSmallIcon(R.drawable.notification_3);
-            mBuilder.setLargeIcon(BitmapFactory.decodeResource(ctx.getResources(), R.drawable.notification));
-            mBuilder.setContentTitle("通知：" + "(" + random + "条新消息)");
-            mBuilder.setContentText("通知内容：...");
-            mBuilder.setAutoCancel(true);//点击后，自动消失
-            mBuilder.setContentIntent(pendingIntent);
             mBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
-            //        mBuilder.setVibrate(new long[]{0, 200, 300}).setSound(sound).setLights(Color.RED, 1000, 1000);
-
-
-            //获取通知管理器对象
-            NotificationManager mNotificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
-            //一个手机号一个通知
-            mNotificationManager.notify(random + "", 0, mBuilder.build());//Tag区分Notification，
         }
+        //一个手机号一个通知
+        mNotificationManager.notify(random + "", 0, mBuilder.build());//Tag区分Notification，
     }
 
 }

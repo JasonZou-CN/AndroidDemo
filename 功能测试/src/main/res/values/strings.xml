@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RunSomething</string>
+    <string name="title_activity_web_socket_test">WebSocketTest</string>
 </resources>
