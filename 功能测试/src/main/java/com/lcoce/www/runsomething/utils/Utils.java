@@ -1,5 +1,6 @@
 package com.lcoce.www.runsomething.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -119,10 +120,12 @@ public class Utils {
         /*Android O*/
         if (Build.VERSION.SDK_INT >= 26) {
             Intent intent = new Intent(ctx, clz);
+            intent.putExtra("name", "");
             PendingIntent pintent = PendingIntent.getActivity(ctx, 0, intent, 0);
-            Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
+            Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             /*Android O：通知控制-通知类别*/
+            @SuppressLint("WrongConstant")
             NotificationChannel mChannel = new NotificationChannel(ctx.getPackageName(), "App通知", NotificationManager.IMPORTANCE_MAX);
             mChannel.setDescription("通知类别描述：紧急通知");
             mChannel.enableLights(true);//是否在桌面icon右上角展示小红点
