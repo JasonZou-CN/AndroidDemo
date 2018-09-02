@@ -1,1 +1,1 @@
-include ':app', ':mView', ':timeline', ':mjpush', ':db', ':mservices', ':拍照与裁剪AndroidN', ':howaboutimageshow', ':documentViewer', ':功能测试'
+include ':app', ':mView', ':timeline', ':mjpush',  ':mservices', ':拍照与裁剪AndroidN',':documentViewer', ':功能测试'
